@@ -16,6 +16,11 @@
           class="text-white font-semibold hover:text-blue-300"
           >Chat</router-link
         >
+        <router-link
+          to="/dash"
+          class="text-white font-semibold hover:text-blue-300"
+          >Dash</router-link
+        >
       </div>
     </div>
   </nav>

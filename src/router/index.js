@@ -22,6 +22,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/ChatView.vue"),
   },
+  {
+    path: "/dash",
+    name: "dash",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/DashView.vue"),
+  },
 ];
 
 const router = createRouter({
