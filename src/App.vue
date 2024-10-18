@@ -21,6 +21,16 @@
           class="text-white font-semibold hover:text-blue-300"
           >Dash</router-link
         >
+        <router-link
+          to="/login"
+          class="text-white font-semibold hover:text-blue-300"
+          >Login</router-link
+        >
+        <router-link
+          to="/page"
+          class="text-white font-semibold hover:text-blue-300"
+          >Page</router-link
+        >
       </div>
     </div>
   </nav>

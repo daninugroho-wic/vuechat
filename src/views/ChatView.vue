@@ -1,36 +1,5 @@
 <template>
   <div class="min-h-screen flex bg-gray-100">
-    <aside
-      v-show="isSidebarVisible"
-      class="w-full md:w-1/4 bg-white rounded-sm p-6 border border-blue-300"
-    >
-      <h2 class="text-xl font-bold cursor-pointer mb-6" @click="toggleSidebar">
-        Kontak
-      </h2>
-      <ul>
-        <li
-          class="flex items-center mb-6 p-4 border-b border-blue-300 pb-4 transition-all duration-300 hover:bg-gray-100 rounded-lg"
-        >
-          <img
-            src="path/to/john-doe.jpg"
-            alt="John Doe"
-            class="w-12 h-12 rounded-full mr-4 shadow-md"
-          />
-          <div class="text-lg font-semibold">Warno</div>
-        </li>
-        <li
-          class="flex items-center mb-6 p-4 border-b border-blue-300 pb-4 transition-all duration-300 hover:bg-gray-100 rounded-lg"
-        >
-          <img
-            src="path/to/jane-smith.jpg"
-            alt="Jane Smith"
-            class="w-12 h-12 rounded-full mr-4 shadow-md"
-          />
-          <div class="text-lg font-semibold">Jimun</div>
-        </li>
-      </ul>
-    </aside>
-
     <div class="flex-grow flex flex-col">
       <header
         class="bg-blue-300 p-4 flex flex-col md:flex-row items-center justify-between"
@@ -111,17 +80,12 @@ const messages = ref([
   { text: "Hello! How are you?", isUser: false },
   { text: "I am fine, thanks!", isUser: true },
 ]);
-const isSidebarVisible = ref(true);
 
 const sendMessage = () => {
   if (newMessage.value.trim()) {
     messages.value.push({ text: newMessage.value, isUser: true });
     newMessage.value = "";
   }
-};
-
-const toggleSidebar = () => {
-  isSidebarVisible.value = !isSidebarVisible.value;
 };
 </script>
 

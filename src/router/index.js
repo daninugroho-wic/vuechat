@@ -28,6 +28,18 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/DashView.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/LoginView.vue"),
+  },
+  {
+    path: "/page",
+    name: "page",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/PageView.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -1,11 +1,13 @@
 <template>
   <div class="min-h-screen flex bg-gray-100">
+    <!-- Sidebar -->
     <div
       class="w-[80px] bg-white shadow-lg p-4 flex flex-col items-center space-y-6"
     >
+      <!-- Chat Button -->
       <button
         class="flex flex-col items-center justify-center p-4 rounded-lg transition-all duration-300"
-        @click="setActivePage('chat')"
+        @click="toggleSidebar"
         :class="
           activePage === 'chat'
             ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-lg'
@@ -57,10 +59,41 @@
         ></i>
       </button>
     </div>
+    <!-- kontak -->
+    <aside
+      v-show="isSidebarVisible"
+      class="w-full md:w-1/4 bg-white rounded-sm p-6 border border-blue-300 shadow-lg transition-all duration-300"
+    >
+      <h2 class="text-xl font-bold cursor-pointer mb-6" @click="toggleSidebar">
+        Kontak
+      </h2>
+      <ul>
+        <li
+          class="flex items-center mb-6 p-4 border-b border-blue-300 pb-4 transition-all duration-300 hover:bg-gray-100 rounded-lg"
+        >
+          <img
+            src="path/to/john-doe.jpg"
+            alt="Warno"
+            class="w-12 h-12 rounded-full mr-4 shadow-md"
+          />
+          <div class="text-lg font-semibold">Warno</div>
+        </li>
+        <li
+          class="flex items-center mb-6 p-4 border-b border-blue-300 pb-4 transition-all duration-300 hover:bg-gray-100 rounded-lg"
+        >
+          <img
+            src="path/to/jane-smith.jpg"
+            alt="Jimun"
+            class="w-12 h-12 rounded-full mr-4 shadow-md"
+          />
+          <div class="text-lg font-semibold">Jimun</div>
+        </li>
+      </ul>
+    </aside>
 
     <div class="flex-grow bg-white shadow p-6">
-      <section v-if="activePage === 'chat'">
-        <ChatView />
+      <section v-if="activePage === 'page'">
+        <PageView />
       </section>
 
       <section v-if="activePage === 'siaran'">
@@ -77,20 +110,29 @@
 </template>
 
 <script>
-import ChatView from "./ChatView.vue"; // Import ChatView
+import PageView from "./PageView.vue";
 
 export default {
   components: {
-    ChatView, // Daftarkan ChatView sebagai komponen
+    PageView,
   },
   data() {
     return {
-      activePage: "chat", // Default halaman yang aktif
+      activePage: "page", // Halaman aktif default
+      isSidebarVisible: false, // Kontrol visibilitas sidebar
     };
   },
   methods: {
     setActivePage(page) {
       this.activePage = page;
+      if (page === "chat") {
+        this.isSidebarVisible = true; // Sidebar muncul saat halaman chat aktif
+      } else {
+        this.isSidebarVisible = false; // Sembunyikan sidebar di halaman lain
+      }
+    },
+    toggleSidebar() {
+      this.isSidebarVisible = !this.isSidebarVisible;
     },
   },
 };
