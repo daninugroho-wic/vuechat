@@ -105,21 +105,28 @@
         <h1 class="text-2xl font-bold mb-4">Komunitas</h1>
         <p>Ini adalah halaman komunitas.</p>
       </section>
+
+      <section v-if="activePage === 'chat'">
+        <ChatView :contactName="selectedContact" />
+      </section>
     </div>
   </div>
 </template>
 
 <script>
 import PageView from "./PageView.vue";
+import ChatView from "./ChatView.vue";
 
 export default {
   components: {
     PageView,
+    ChatView,
   },
   data() {
     return {
       activePage: "page", // Halaman aktif default
       isSidebarVisible: false, // Kontrol visibilitas sidebar
+      selectedContact: null, // Untuk menyimpan nama kontak yang dipilih
     };
   },
   methods: {
@@ -133,6 +140,7 @@ export default {
     },
     toggleSidebar() {
       this.isSidebarVisible = !this.isSidebarVisible;
+      this.setActivePage("chat"); // Set halaman menjadi 'chat'
     },
   },
 };
