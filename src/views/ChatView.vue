@@ -1,17 +1,40 @@
 <template>
   <div class="min-h-screen flex bg-gray-100">
-    <div class="flex-grow flex flex-col bg-white border-l border-gray-200 rounded-tl-lg overflow-hidden">
+    <div class="flex-grow flex flex-col bg-white border-l border-gray-200 overflow-hidden">
       <!-- Header -->
-      <header class="bg-blue-500 p-4 flex items-center rounded-lg justify-between border-b border-gray-200">
-        <h1 class="text-white text-2xl font-semibold cursor-pointer">
-          Welcome, {{ username }}
-        </h1>
+      <header class="bg-blue-500 p-4 flex items-center justify-between border-b border-gray-200">
+        <!-- Bagian Welcome dan Profil -->
         <div class="flex items-center space-x-4">
+          <!-- Profil Icon -->
+          <div class="relative">
+            <img src="profile-picture-url.jpg" alt="Profile Picture"
+              class="w-10 h-10 rounded-full border-2 border-white cursor-pointer hover:opacity-80 transition-opacity duration-300">
+          </div>
+          <h1 class="text-white text-2xl font-semibold cursor-pointer">
+            {{ username }}
+          </h1>
+        </div>
+
+        <!-- Bagian tombol telepon, video call, search, dan titik tiga -->
+        <div class="flex items-center space-x-6">
+          <!-- Telepon -->
           <button class="text-white hover:text-gray-300">
             <i class="fas fa-phone-alt text-lg"></i>
           </button>
+
+          <!-- Video Call -->
           <button class="text-white hover:text-gray-300">
             <i class="fas fa-video text-lg"></i>
+          </button>
+
+          <!-- Pencarian -->
+          <button class="text-white hover:text-gray-300">
+            <i class="fas fa-search text-lg"></i>
+          </button>
+
+          <!-- Titik Tiga (More options) -->
+          <button class="text-white hover:text-gray-300">
+            <i class="fas fa-ellipsis-v text-lg"></i>
           </button>
         </div>
       </header>
