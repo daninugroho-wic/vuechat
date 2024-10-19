@@ -1,75 +1,94 @@
 <template>
   <div class="min-h-screen flex bg-gray-100">
-    <div class="flex-grow flex flex-col">
-      <header
-        class="bg-blue-300 p-4 flex flex-col md:flex-row items-center justify-between"
-      >
-        <h1
-          class="text-lg font-bold cursor-pointer mb-2 md:mb-0"
-          @click="toggleSidebar"
-        >
+    <div class="flex-grow flex flex-col bg-white border-l border-gray-200 rounded-tl-lg overflow-hidden">
+      <!-- Header -->
+      <header class="bg-blue-500 p-4 flex items-center rounded-lg justify-between border-b border-gray-200">
+        <h1 class="text-white text-2xl font-semibold cursor-pointer">
           Welcome, {{ username }}
         </h1>
-        <div class="flex items-center space-x-4 ml-auto">
-          <button class="text-blue-500 hover:text-blue-700">
+        <div class="flex items-center space-x-4">
+          <button class="text-white hover:text-gray-300">
             <i class="fas fa-phone-alt text-lg"></i>
           </button>
-          <button class="text-green-500 hover:text-green-700">
+          <button class="text-white hover:text-gray-300">
             <i class="fas fa-video text-lg"></i>
           </button>
         </div>
       </header>
 
+      <!-- Chat Messages -->
       <div class="flex-grow p-4 overflow-y-auto">
-        <div v-for="(msg, index) in messages" :key="index" class="mb-4">
-          <div :class="msg.isUser ? 'text-right' : 'text-left'">
-            <p
-              :class="
-                msg.isUser
-                  ? 'bg-blue-500 text-white p-2 rounded-lg inline-block'
-                  : 'bg-gray-300 p-2 rounded-lg inline-block'
-              "
-            >
-              {{ msg.text }}
-            </p>
+        <div class="space-y-4">
+          <div v-for="(msg, index) in messages" :key="index"
+            :class="{ 'text-right': msg.isUser, 'text-left': !msg.isUser }" class="flex items-start space-x-2">
+            <!-- Message from the user -->
+            <div v-if="msg.isUser" class="ml-auto">
+              <div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs break-words">
+                {{ msg.text }}
+              </div>
+            </div>
+            <!-- Message from the other party -->
+            <div v-else class="mr-auto rounded-lg">
+              <div class="bg-gray-200 text-gray-700 p-3 rounded-lg max-w-xs break-words">
+                {{ msg.text }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <footer class="bg-white p-4 flex flex-col md:flex-row items-center">
-        <div class="flex space-x-2 mb-2 md:mb-0">
-          <button class="p-2 bg-gray-200 rounded-full">
-            <i class="fas fa-smile text-gray-500 h-6 w-6"></i>
+      <!-- Footer - Input Area -->
+      <footer class="bg-blue-50 p-4 flex items-center border-t border-gray-200 rounded-lg space-x-4">
+        <div class="flex space-x-2 items-center">
+          <!-- Emoji, Attachments, Camera Icons -->
+          <button class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition ease-in-out duration-150">
+            <i class="fas fa-smile text-gray-500"></i>
           </button>
-          <button class="p-2 bg-gray-200 rounded-full">
-            <i class="fas fa-thumbtack text-gray-500 h-6 w-6"></i>
+          <button class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition ease-in-out duration-150">
+            <i class="fas fa-paperclip text-gray-500"></i>
           </button>
-          <button class="p-2 bg-gray-200 rounded-full">
-            <i class="fas fa-camera text-gray-500 h-6 w-6"></i>
+          <button class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition ease-in-out duration-150">
+            <i class="fas fa-camera text-gray-500"></i>
           </button>
         </div>
-        <input
-          v-model="newMessage"
-          type="text"
-          placeholder="Type a message"
-          class="flex-grow border p-2 rounded-lg mr-2 mb-2 md:mb-0"
-        />
-        <button
-          @click="sendMessage"
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center mb-2 md:mb-0"
-        >
-          <i class="fas fa-paper-plane mr-2"></i> Send
-        </button>
-        <button
-          @click="startRecording"
-          class="bg-red-500 text-white px-4 py-2 rounded-lg ml-0 md:ml-2 flex items-center"
-        >
-          <i class="fas fa-record-vinyl mr-2"></i> Record
+
+        <!-- Message Input and Send Button -->
+        <input v-model="newMessage" type="text" placeholder="Type a message..."
+          class="flex-grow bg-gray-100 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out" />
+
+        <button @click="sendMessage"
+          class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out focus:outline-none">
+          <i class="fas fa-paper-plane"></i>
         </button>
       </footer>
+
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: "User",
+      messages: [],
+      newMessage: "",
+    };
+  },
+  methods: {
+    sendMessage() {
+      if (this.newMessage.trim() !== "") {
+        this.messages.push({ text: this.newMessage, isUser: true });
+        this.newMessage = "";
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Custom styles if needed */
+</style>
 
 <script setup>
 import { ref } from "vue";
